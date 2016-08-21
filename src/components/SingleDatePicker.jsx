@@ -173,6 +173,8 @@ export default class SingleDatePicker extends React.Component {
       onNextMonthClick,
       withPortal,
       withFullScreenPortal,
+      visibleMonthOnOpen,
+      focused,
     } = this.props;
 
     const modifiers = {
@@ -202,6 +204,8 @@ export default class SingleDatePicker extends React.Component {
           monthFormat={monthFormat}
           withPortal={withPortal || withFullScreenPortal}
           onOutsideClick={onOutsideClick}
+          visibleMonthOnOpen={visibleMonthOnOpen}
+          focused={focused}
         />
 
         {withFullScreenPortal &&

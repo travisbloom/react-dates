@@ -316,6 +316,8 @@ export default class DateRangePicker extends React.Component {
       withPortal,
       withFullScreenPortal,
       enableOutsideDays,
+      visibleMonthOnOpen,
+      focused,
     } = this.props;
 
     const modifiers = {
@@ -357,6 +359,8 @@ export default class DateRangePicker extends React.Component {
           monthFormat={monthFormat}
           withPortal={withPortal || withFullScreenPortal}
           onOutsideClick={onOutsideClick}
+          visibleMonthOnOpen={visibleMonthOnOpen}
+          focused={focused}
         />
 
         {withFullScreenPortal &&

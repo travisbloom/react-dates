@@ -86,6 +86,11 @@ storiesOf('DateRangePicker', module)
       blockedDates={datesList}
     />
   ))
+  .add('will open to specific month', () => (
+    <DateRangePickerWrapper
+      visibleMonthOnOpen={moment('01 2016', 'MM YYYY')}
+    />
+  ))
   .add('blockedByDefault', () => (
     <DateRangePickerWrapper
       unblockedDates={datesList}

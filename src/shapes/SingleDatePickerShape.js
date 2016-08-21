@@ -18,6 +18,7 @@ export default {
   allowPastDates: PropTypes.bool,
   enableOutsideDays: PropTypes.bool,
   numberOfMonths: PropTypes.number,
+  visibleMonthOnOpen: momentPropTypes.momentObj,
   orientation: OrientationShape,
 
   // portal options

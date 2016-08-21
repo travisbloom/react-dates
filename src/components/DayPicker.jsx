@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import $ from 'jquery';
 import cx from 'classnames';
+import momentPropTypes from 'react-moment-proptypes';
 
 import OutsideClickHandler from './OutsideClickHandler';
 import CalendarMonthGrid from './CalendarMonthGrid';
@@ -32,6 +33,7 @@ const propTypes = {
   modifiers: PropTypes.object,
   orientation: OrientationShape,
   withPortal: PropTypes.bool,
+  visibleMonthOnOpen: momentPropTypes.momentObj,
   onDayClick: PropTypes.func,
   onDayMouseDown: PropTypes.func,
   onDayMouseUp: PropTypes.func,
@@ -54,6 +56,7 @@ const defaultProps = {
   modifiers: {},
   orientation: HORIZONTAL_ORIENTATION,
   withPortal: false,
+  visibleMonthOnOpen: moment(),
   onDayClick() {},
   onDayMouseDown() {},
   onDayMouseUp() {},
@@ -74,7 +77,7 @@ export default class DayPicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentMonth: moment(),
+      currentMonth: props.visibleMonthOnOpen,
       monthTransition: null,
       translationValue: 0,
     };
@@ -101,6 +104,17 @@ export default class DayPicker extends React.Component {
         this.adjustDayPickerHeight();
       }
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+      if (
+          nextProps.focused &&
+          !this.props.focused &&
+          nextProps.visibleMonthOnOpen &&
+          !nextProps.visibleMonthOnOpen.isSame(this.props.currentMonth)
+      ) {
+          this.setState({currentMonth: nextProps.visibleMonthOnOpen});
+      }
   }
 
   getMonthHeightByIndex(i) {
